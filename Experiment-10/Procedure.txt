@@ -1,0 +1,11 @@
+PROCEDURE:
+1. Create the FLEX file backend.l to tokenize identifiers and operators from TAC lines.
+2. Create the BISON file backend.y with a grammar for TAC assignment statements, embedding 8086
+    MOV/ADD/SUB/MUL/DIV instruction generation directly in the semantic actions.
+3. Compile and run:
+    flex backend.l
+    bison -d backend.y
+    gcc lex.yy.c backend.tab.c -o backend -lfl
+    ./backend
+4. Input TAC statements such as: t1 = a + b followed by x = t1
+5. View the generated 8086 assembly code.

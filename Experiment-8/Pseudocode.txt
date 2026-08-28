@@ -1,0 +1,125 @@
+PSEUDOCODE:
+START
+
+Initialize an empty Symbol Table
+Set number of symbols N = 0
+
+
+LEXICAL ANALYZER
+
+For each input token:
+
+    If token is "int"
+        Return INT
+
+    Else if token is "float"
+        Return FLOAT
+
+    Else if token matches identifier pattern
+        Store identifier name
+        Return ID
+
+    Else if token matches a number
+        Store number
+        Return NUM
+
+    Else if token is one of:
+        =, +, -, *, /, ;
+        Return the corresponding symbol
+
+    Else if token is whitespace
+        Ignore it
+
+
+PARSER
+
+Parse the input as a sequence of statements.
+
+For each statement:
+
+    If statement is a declaration:
+        
+        If it is "int ID ;"
+            Insert ID into Symbol Table with type "int"
+
+        Else if it is "float ID ;"
+            Insert ID into Symbol Table with type "float"
+
+
+    If statement is an assignment:
+        
+        Parse:
+            ID = expression ;
+
+        Find the type of ID in the Symbol Table.
+
+        If ID is not found
+            Print "Undefined variable"
+
+        Else
+            Find the type of the expression.
+
+            If variable type == expression type
+                Print "No type mismatch"
+
+            Else
+                Print "Type mismatch"
+
+
+EXPRESSION TYPE CHECKING
+
+If expression is an ID:
+
+    Search ID in Symbol Table.
+
+    If ID is not found
+        Print "Undefined variable"
+
+    Return its type
+
+
+If expression is a number:
+
+    Return type "int"
+
+
+If expression is:
+
+    expression + expression
+    expression - expression
+    expression * expression
+    expression / expression
+
+    Check the types of both operands.
+
+    If both operand types are the same
+        Return that type
+
+    Else
+        Return "mismatch"
+
+
+SYMBOL TABLE OPERATIONS
+
+INSERT(name, type):
+
+    Add name and its type to Symbol Table
+
+
+TYPEOF(name):
+
+    Search Symbol Table.
+
+    If name is found
+        Return its stored type
+
+    Else
+        Return "undefined"
+
+
+If parsing encounters an invalid syntax:
+
+    Print "Syntax Error"
+
+
+END

@@ -1,0 +1,87 @@
+PSEUDOCODE:
+
+START
+
+Initialize lexical analyzer and parser.
+
+Read Three Address Code statements.
+
+LEXICAL ANALYZER:
+
+For each input token:
+
+    If token is an identifier:
+        Return ID
+
+    If token is one of:
+        =, +, -, *, /, ;
+        Return the corresponding symbol
+
+    If token is whitespace:
+        Ignore it
+
+
+PARSER:
+
+Parse each statement in the form:
+
+    ID = expression ;
+
+
+CODE GENERATION:
+
+If expression is an ID:
+
+    Generate:
+        MOV AX, ID
+
+    AX now contains the value of ID.
+
+
+If expression is:
+
+    expression + ID
+
+    Generate:
+        ADD AX, ID
+
+
+If expression is:
+
+    expression - ID
+
+    Generate:
+        SUB AX, ID
+
+
+If expression is:
+
+    expression * ID
+
+    Generate:
+        MUL ID
+
+
+If expression is:
+
+    expression / ID
+
+    Generate:
+        MOV DX, 0
+        MOV BX, ID
+        DIV BX
+
+
+After the complete expression is evaluated:
+
+    Move the result from AX to the
+    left-hand-side variable:
+
+        MOV variable, AX
+
+
+If invalid syntax is encountered:
+
+    Print "Syntax Error"
+
+END

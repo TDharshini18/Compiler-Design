@@ -1,0 +1,21 @@
+PROCEDURE:
+1. Create FLEX File (typecheck.l)
+    o Define patterns for keywords (int, float), identifiers, numbers, and operators.
+    o Return these tokens to BISON for further processing.
+2. Create BISON File (typecheck.y)
+    o Define grammar rules for declarations and expressions.
+    o Maintain a symbol table (array of name/type pairs) that is filled in on each declaration.
+    o On each assignment, verify that the operand types and result type match and print the outcome.
+3. Compile the FLEX and BISON Files
+    flex typecheck.l
+    bison -d typecheck.y
+    gcc lex.yy.c typecheck.tab.c -o typecheck -lfl
+4. Run the Program
+    ./typecheck
+    o Input variable declarations and expressions, ending each statement with &#39;;&#39;.
+    o Observe output showing the type-checking result.
+5. Test with Various Inputs
+    o Try correctly typed expressions.
+    o Try mismatched types (e.g., int a; float b; a = b + 1;).
+    o Try using undeclared variables.
+6. End the Program

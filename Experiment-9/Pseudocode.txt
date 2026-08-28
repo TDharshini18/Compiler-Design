@@ -1,0 +1,119 @@
+PSEUDOCODE:
+
+START
+
+Initialize lexical analyzer and parser.
+
+Read Three Address Code statements.
+
+LEXICAL ANALYZER:
+
+For each input token:
+
+    If token is an identifier
+        Return ID
+
+    Else if token is a number
+        Return NUM
+
+    Else if token is =, +, -, *, /, ;
+        Return corresponding symbol
+
+    Else if token is whitespace
+        Ignore it
+
+
+PARSER:
+
+Parse each statement in the form:
+
+    ID = expression ;
+
+
+EXPRESSION OPTIMIZATION:
+
+If expression is a number:
+    Return the number.
+
+If expression is an identifier:
+    Return the identifier.
+
+
+For expression A + B:
+
+    If A and B are constants:
+        Calculate A + B
+        Replace expression with result
+        Report Constant Folding
+
+    Else if B = 0:
+        Replace A + 0 with A
+        Report Algebraic Simplification
+
+    Else if A = 0:
+        Replace 0 + B with B
+        Report Algebraic Simplification
+
+    Else:
+        Keep expression as A + B
+
+
+For expression A - B:
+
+    If A and B are constants:
+        Calculate A - B
+        Replace expression with result
+        Report Constant Folding
+
+    Else if B = 0:
+        Replace A - 0 with A
+        Report Algebraic Simplification
+
+    Else:
+        Keep expression as A - B
+
+
+For expression A * B:
+
+    If A and B are constants:
+        Calculate A * B
+        Replace expression with result
+        Report Constant Folding
+
+    Else if B = 1:
+        Replace A * 1 with A
+        Report Algebraic Simplification
+
+    Else if B = 2:
+        Replace A * 2 with A + A
+        Report Strength Reduction
+
+    Else:
+        Keep expression as A * B
+
+
+For expression A / B:
+
+    If A and B are constants:
+        Calculate A / B
+        Replace expression with result
+        Report Constant Folding
+
+    Else if B = 1:
+        Replace A / 1 with A
+        Report Algebraic Simplification
+
+    Else:
+        Keep expression as A / B
+
+
+After optimizing the expression:
+
+    Print:
+        variable = optimized expression
+
+
+If invalid syntax is encountered:
+    Report Syntax Error
+
+END
